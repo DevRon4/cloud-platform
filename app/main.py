@@ -8,7 +8,7 @@ def home():
     return jsonify({
         "status": "healthy",
         "message": "Cloud platform running on EKS",
-        "version": "1.0.0"
+        "version": "2.0.0"
     })
 
 @app.route("/health")
