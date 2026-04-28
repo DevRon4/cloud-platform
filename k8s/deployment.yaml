@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-platform-app
+  labels:
+    app: cloud-platform
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cloud-platform
+  template:
+    metadata:
+      labels:
+        app: cloud-platform
+    spec:
+      containers:
+      - name: app
+        image: 816069125212.dkr.ecr.us-east-1.amazonaws.com/cloud-platform-app:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
