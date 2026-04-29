@@ -1,4 +1,22 @@
-steps:
+name: Build and Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  AWS_REGION: ${{ secrets.AWS_REGION }}
+  ECR_REPOSITORY: cloud-platform-app
+  EKS_CLUSTER: cloud-platform-cluster
+
+jobs:
+  deploy:
+    name: Build, push and deploy
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Checkout code
       uses: actions/checkout@v4
 
