@@ -59,3 +59,12 @@ module "observability" {
   eks_cluster_name = module.eks.cluster_name
   alert_email      = "ronnieharmon390@yahoo.com"
 }
+
+module "secrets" {
+  source       = "./modules/secrets"
+  project_name = var.project_name
+}
+
+output "secret_arn" {
+  value = module.secrets.secret_arn
+}
